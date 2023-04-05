@@ -17,7 +17,10 @@ const db = settings.atlasUrl
 // attempt to connect with DB
 mongoose
     .connect(db)
-    .then(() => console.log('MongoDB connected successfully.'))
+    .then(() => {
+        console.log('MongoDB connected successfully.')
+        app.listen(port, () => console.log(`App running at port : ${port}`))
+    })
     .catch(err => console.log(err))
 
 // Get profile routes
@@ -30,4 +33,3 @@ app.get('/', (req, res) => {
 // actual routes
 // app.use('/api/profile', profile)
 
-app.listen(port, () => console.log(`App running at port : ${port}`))
