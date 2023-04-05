@@ -36,8 +36,13 @@ router.get('/', (req, res) => {
     const perPage = req.query.perPage
     const depth = req.query.depth
 
-    Shipwreck
-        .find({}).skip((page - 1) * perPage).limit(perPage)
+    const query = Shipwreck.find({})
+
+    if (depth) {
+        query.where('depth').equals(depth)
+    }
+
+    query.skip((page - 1) * perPage).limit(perPage)
         .then(shipwrecks => res.status(200).send(shipwrecks))
         .catch(err => res.status(500).send(err))
 })
