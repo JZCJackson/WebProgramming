@@ -29,6 +29,13 @@ router.post('/', (req, res) => {
 
 })
 
+router.get('/:id', (req, res) => {
+    Shipwreck
+        .findOne({_id: req.params.id})
+        .then(shipwreck => res.send(shipwreck))
+        .catch(err => console.log(err))
+})
+
 
 
 module.exports = router
