@@ -50,4 +50,4 @@ const ShipwreckSchema = new Schema({
     },
 })
 
-module.exports = Shipwreck = mongoose.model('shipwreck', ShipwreckSchema)
+module.exports = Shipwreck = mongoose.model('Shipwreck', ShipwreckSchema)
