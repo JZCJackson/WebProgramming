@@ -25,8 +25,8 @@ router.post('/', (req, res) => {
 
     newShipwreck
         .save()
-        .then(shipwreck => res.send(shipwreck))
-        .catch(err => res.send(err))
+        .then(shipwreck => res.status(201).send(shipwreck))
+        .catch(err => res.status(500).send(err))
 
 })
 
@@ -34,7 +34,7 @@ router.post('/', (req, res) => {
 router.get('/:id', (req, res) => {
     Shipwreck
         .findOne({ _id: req.params.id })
-        .then(shipwreck => res.send(shipwreck))
+        .then(shipwreck => res.status(200).send(shipwreck))
         .catch(err => res.status(500).send(err))
 })
 
@@ -61,9 +61,21 @@ router.put('/:id', (req, res) => {
         })
         .exec()
         .then(() => {
-            res.status(201).send('Record Updated: ' + req.params.id)
+            res.status(200).send('Record Updated: ' + req.params.id)
         })
         .catch((err) => {
+            res.status(500).send(err)
+        })
+})
+
+// delete record
+router.delete('/:id', (req, res) => {
+    Shipwreck.deleteOne({_id: req.params.id})
+        .exec()
+        .then(() => {
+            res.status(204).send('Record deleted')
+        })
+        .catch((err) => { 
             res.status(500).send(err)
         })
 })
