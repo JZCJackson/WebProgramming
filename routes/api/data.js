@@ -73,7 +73,7 @@ router.delete('/:id', (req, res) => {
     Shipwreck.deleteOne({_id: req.params.id})
         .exec()
         .then(() => {
-            res.status(204).send('Record deleted')
+            res.status(200).send('Record Deleted: ' + req.params.id)
         })
         .catch((err) => { 
             res.status(500).send(err)
