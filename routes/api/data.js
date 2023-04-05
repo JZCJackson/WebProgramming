@@ -30,6 +30,18 @@ router.post('/', (req, res) => {
 
 })
 
+// get by query
+router.get('/', (req, res) => {
+    const page = req.query.page
+    const perPage = req.query.perPage
+    const depth = req.query.depth
+
+    Shipwreck
+        .find({}).skip((page - 1) * perPage).limit(perPage)
+        .then(shipwrecks => res.status(200).send(shipwrecks))
+        .catch(err => res.status(500).send(err))
+})
+
 // get by id
 router.get('/:id', (req, res) => {
     Shipwreck
