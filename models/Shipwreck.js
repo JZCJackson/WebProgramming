@@ -3,12 +3,10 @@ const Schema = mongoose.Schema
 
 const ShipwreckSchema = new Schema({
     recrd: {
-        type: String,
-        required: true
+        type: String
     },
     vesslterms: {
-        type: String,
-        required: true
+        type: String
     },
     feature_type: {
         type: String,
@@ -27,24 +25,20 @@ const ShipwreckSchema = new Schema({
         required: true
     },
     gp_quality: {
-        type: String,
-        required: true
+        type: String
     },
     depth: {
         type: Number,
         required: true
     },
     sounding_type: {
-        type: String,
-        required: true
+        type: String
     },
     history: {
-        type: String,
-        required: true
+        type: String
     },
     quasou: {
-        type: String,
-        required: true
+        type: String
     },
     watlev: {
         type: String,

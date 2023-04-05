@@ -24,12 +24,12 @@ mongoose
     .catch(err => console.log(err))
 
 // Get profile routes
-const profile = require('./routes/api/profile')
+const data = require('./routes/api/data')
 
 app.get('/', (req, res) => {
     res.send('Project is Running')
 })
 
 // actual routes
-// app.use('/api/profile', profile)
+app.use('/api/data', data)
 
