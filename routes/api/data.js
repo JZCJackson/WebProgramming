@@ -1,10 +1,15 @@
 const express = require('express')
 const router = express.Router()
 
+// const app = express()
+// // middleware for bodyparser
+// app.use(express.urlencoded({ extended: true }));
+
 // Import Person schema
 const Shipwreck = require('./../../models/Shipwreck')
 
-// post a new record
+// Add new Shipwreck record
+// [POST] http://localhost:8000/api/data/
 router.post('/', (req, res) => {
 
     const newShipwreck = Shipwreck({
@@ -30,7 +35,8 @@ router.post('/', (req, res) => {
 
 })
 
-// get by query
+// get Shipwreck records by certain page, perPage, and depth
+// [GET] http://localhost:8000/api/data/
 router.get('/', (req, res) => {
     const page = req.query.page
     const perPage = req.query.perPage
@@ -47,7 +53,8 @@ router.get('/', (req, res) => {
         .catch(err => res.status(500).send(err))
 })
 
-// get by id
+// Get Shipwreck record by id
+// [GET] http://localhost:8000/api/data/:id
 router.get('/:id', (req, res) => {
     Shipwreck
         .findOne({ _id: req.params.id })
@@ -55,7 +62,23 @@ router.get('/:id', (req, res) => {
         .catch(err => res.status(500).send(err))
 })
 
-// update record
+// router.get('/:id', async (req, res) => {
+//     const shipwreck = await Shipwreck.findOne({ _id: req.params.id })
+//      try {
+//         res.status(200).render(
+//             'singleData',
+//             {
+//                 data: shipwreck
+//             }
+//         )
+//         console.print(shipwreck)
+//      } catch (err) {
+//         res.status(500).send(err)
+//      }
+// })
+
+// Update Shipwreck record by id
+// [PUT] http://localhost:8000/api/data/:id
 router.put('/:id', (req, res) => {
     Shipwreck.updateOne(
         { _id: req.params.id },
@@ -85,7 +108,8 @@ router.put('/:id', (req, res) => {
         })
 })
 
-// delete record
+// Delete Shipwreck record by id
+// [DELETE] http://localhost:8000/api/data/:id
 router.delete('/:id', (req, res) => {
     Shipwreck.deleteOne({_id: req.params.id})
         .exec()

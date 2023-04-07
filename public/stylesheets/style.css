@@ -1,0 +1,75 @@
+/* -------------------------------------------------- */
+/* BASIC SETUP */
+/* -------------------------------------------------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    font-family: 'Arial', 'Helvetica', 'sans-serif';
+    font-size: 15px;
+    font-weight: 300;
+}
+
+body {
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+    text-align: center;
+}
+
+.menu a {
+    color: aliceblue !important;
+}
+
+.menu li {
+    display: inline-block;
+    padding: 10px;
+    background-color: cadetblue;
+}
+
+ul {
+    list-style-type: none;
+    padding-top: 10px;
+}
+
+.center-content {
+    display: flex;
+    margin: auto;
+    align-items:center;
+    justify-content:center;
+}
+
+.form-center {
+    margin-top: 35vh;
+    margin-bottom: 40vh;
+}
+
+/* .main-content {
+    height: 80vh;
+} */
+
+.footer, .header {
+    height: 60px;
+    background-color: lightblue;
+}
+
+table {
+    border-collapse: collapse;
+    border: 2px solid black;
+    margin: 10px;
+}
+
+th, td {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+#single-data, form {
+    margin: 10px;
+}
+
+.highlight {
+    background-color: yellow;
+}
