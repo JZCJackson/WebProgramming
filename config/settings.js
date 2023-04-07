@@ -1,4 +1,10 @@
+// module.exports = {
+//     // atlasUrl: "mongodb+srv://georgewang:N01371888@cluster0.rfz1ilx.mongodb.net/sample_geospatial?retryWrites=true&w=majority"
+//     atlasUrl : 'mongodb+srv://tuyichen:Chen0311!@firstproject.vwje0f5.mongodb.net/sample_geospatial?retryWrites=true&w=majority'
+// }
+
 module.exports = {
-    // atlasUrl: "mongodb+srv://georgewang:N01371888@cluster0.rfz1ilx.mongodb.net/sample_geospatial?retryWrites=true&w=majority"
-    atlasUrl : 'mongodb+srv://tuyichen:Chen0311!@firstproject.vwje0f5.mongodb.net/sample_geospatial?retryWrites=true&w=majority'
-}
+    atlasUrl: process.env.MONGODB_URL || "your_default_connection_string",
+    secret: process.env.SECRET || "your_default_secret",
+  };
+  

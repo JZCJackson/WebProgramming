@@ -2,6 +2,9 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 var path = require('path')
+const bodyParser = require('body-parser')
+const passport = require('passport')
+require('dotenv').config();
 
 const port = process.env.PORT || 8000
 
@@ -47,6 +50,7 @@ app.set(
 
 // Get data routes
 const data = require('./routes/api/data')
+const auth = require('./routes/api/auth')
 
 // [GET] http://localhost:8000/
 app.get('/', (req, res) => {
@@ -61,7 +65,10 @@ app.get('/', (req, res) => {
 
 // actual routes: mapping data routes to /api/data endpoints 
 app.use('/api/data', data)
+app.use('/api/auth', auth)
 
+// Config for JWT strategy
+require('./strategies/jsonwtStrategy')(passport)
 
 // Handles all not found URLs
 app.get('*', function (req, res) {

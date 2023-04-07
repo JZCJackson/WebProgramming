@@ -1,0 +1,6 @@
+# existing entries
+node_modules
+dist
+
+# add .env entry
+.env
