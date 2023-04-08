@@ -1,5 +1,8 @@
 const express = require('express')
 const router = express.Router()
+const passport = require('passport');
+const jsonwt = require('jsonwebtoken');
+const settings = require('../../config/settings');
 
 // const app = express()
 // // middleware for bodyparser
@@ -10,7 +13,8 @@ const Shipwreck = require('./../../models/Shipwreck')
 
 // Add new Shipwreck record
 // [POST] http://localhost:8000/api/data/
-router.post('/', (req, res) => {
+
+router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const newShipwreck = Shipwreck({
         recrd: req.body.recrd,
@@ -37,7 +41,9 @@ router.post('/', (req, res) => {
 
 // get Shipwreck records by certain page, perPage, and depth
 // [GET] http://localhost:8000/api/data/
-router.get('/', (req, res) => {
+
+router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+
     const page = req.query.page
     const perPage = req.query.perPage
     const depth = req.query.depth
@@ -55,7 +61,9 @@ router.get('/', (req, res) => {
 
 // Get Shipwreck record by id
 // [GET] http://localhost:8000/api/data/:id
-router.get('/:id', (req, res) => {
+
+router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
     Shipwreck
         .findOne({ _id: req.params.id })
         .then(shipwreck => res.status(200).send(shipwreck))
@@ -79,7 +87,9 @@ router.get('/:id', (req, res) => {
 
 // Update Shipwreck record by id
 // [PUT] http://localhost:8000/api/data/:id
-router.put('/:id', (req, res) => {
+
+router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
     Shipwreck.updateOne(
         { _id: req.params.id },
         {
@@ -110,7 +120,8 @@ router.put('/:id', (req, res) => {
 
 // Delete Shipwreck record by id
 // [DELETE] http://localhost:8000/api/data/:id
-router.delete('/:id', (req, res) => {
+router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
+
     Shipwreck.deleteOne({_id: req.params.id})
         .exec()
         .then(() => {
