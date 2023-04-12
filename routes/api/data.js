@@ -4,16 +4,11 @@ const passport = require('passport');
 const jsonwt = require('jsonwebtoken');
 const settings = require('../../config/settings');
 
-// const app = express()
-// // middleware for bodyparser
-// app.use(express.urlencoded({ extended: true }));
-
 // Import Person schema
 const Shipwreck = require('./../../models/Shipwreck')
 
 // Add new Shipwreck record
 // [POST] http://localhost:8000/api/data/
-
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const newShipwreck = Shipwreck({
@@ -39,9 +34,13 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
 })
 
+// [GET] http://localhost:8000/api/data/add
+router.get('/add', (req, res) => {
+    res.render("add", {})
+})
+
 // get Shipwreck records by certain page, perPage, and depth
 // [GET] http://localhost:8000/api/data/
-
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     const page = req.query.page
@@ -61,7 +60,6 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
 
 // Get Shipwreck record by id
 // [GET] http://localhost:8000/api/data/:id
-
 router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     Shipwreck
@@ -87,7 +85,6 @@ router.get('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
 
 // Update Shipwreck record by id
 // [PUT] http://localhost:8000/api/data/:id
-
 router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) => {
 
     Shipwreck.updateOne(

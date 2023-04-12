@@ -13,7 +13,8 @@ const Person = require('./../../models/Person')
 
 router.use(cookie())
 
-// Route to register a user. URL : /api/auth/register
+// Route to register a user
+// [POST] http://localhost:8000/api/auth/register
 router.post('/register', (req, res) => {
     // check if username is already in collection.
     Person
@@ -53,7 +54,8 @@ router.post('/register', (req, res) => {
         .catch(err => res.send(err))
 })
 
-// Route to login a user. URL : /api/auth/login
+// Route to login a user
+// [POST] http://localhost:8000/api/auth/login
 router.post('/login', (req, res) => {
     username = req.body.username
     password = req.body.password // 123456
@@ -119,6 +121,7 @@ router.post('/login', (req, res) => {
 // }
 
 // Private route to get all user details
+// [GET] http://localhost:8000/api/auth/get
 router.get(
     '/get',
     passport.authenticate('jwt', { session: false }), // middleware from passport-jwt
@@ -129,6 +132,16 @@ router.get(
         people_un.push(person.username)
     })
     res.send(people_un)
+})
+
+// [GET] http://localhost:8000/api/auth/register
+router.get('/register', (req, res) => {
+    res.render("register", {})
+})
+
+// [GET] http://localhost:8000/api/auth/login
+router.get('/login', (req, res) => {
+    res.render("login", {})
 })
 
 module.exports = router

@@ -36,19 +36,10 @@ ul {
 
 .center-content {
     display: flex;
-    margin: auto;
+    padding: 10px;
     align-items:center;
     justify-content:center;
 }
-
-.form-center {
-    margin-top: 35vh;
-    margin-bottom: 40vh;
-}
-
-/* .main-content {
-    height: 80vh;
-} */
 
 .footer, .header {
     height: 60px;

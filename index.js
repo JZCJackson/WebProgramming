@@ -54,13 +54,7 @@ const auth = require('./routes/api/auth')
 
 // [GET] http://localhost:8000/
 app.get('/', (req, res) => {
-    // res.send('Project is Running')
-    res.render(
-        'index', 
-        { 
-            message: 'Project is Running'
-        }
-    );
+    res.render('index', { message: 'Project is Running'});
 })
 
 // actual routes: mapping data routes to /api/data endpoints 
