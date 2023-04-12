@@ -44,7 +44,10 @@ router.post('/register', (req, res) => {
                             // add new person with hashed password.
                             person
                                 .save()
-                                .then(person => res.send('add success'))
+                                .then(person => 
+                                    // res.send('add success')
+                                    res.status(200).render('index', { message: 'add success'})
+                                )
                                 .catch(err => res.send(err.message))
                         }
                     })

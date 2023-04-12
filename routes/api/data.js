@@ -24,7 +24,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
         history: req.body.history,
         quasou: req.body.quasou,
         watlev: req.body.watlev,
-        coordinates: req.body.coordinates
+        // coordinates: req.body.coordinates
+        coordinates: [req.body.londec, req.body.latdec]
     })
 
     newShipwreck
@@ -34,9 +35,10 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
 })
 
+// render addData page to show add Shipwreck form
 // [GET] http://localhost:8000/api/data/add
 router.get('/add', (req, res) => {
-    res.render("add", {})
+    res.render("addData", {})
 })
 
 // get Shipwreck records by certain page, perPage, and depth
@@ -56,6 +58,10 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     query.skip((page - 1) * perPage).limit(perPage)
         .then(shipwrecks => res.status(200).send(shipwrecks))
         .catch(err => res.status(500).send(err))
+})
+
+router.get('/search', (req, res) => {
+    res.render("searchData", {})
 })
 
 // Get Shipwreck record by id
@@ -103,7 +109,8 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
                 history: req.body.history,
                 quasou: req.body.quasou,
                 watlev: req.body.watlev,
-                coordinates: req.body.coordinates
+                // coordinates: req.body.coordinates
+                coordinates: [req.body.londec, req.body.latdec]
             }
         })
         .exec()

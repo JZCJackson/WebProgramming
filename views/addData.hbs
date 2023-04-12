@@ -1,5 +1,5 @@
 <div class="center-content">
-    <form method="POST" action="/add">
+    <form method="POST" action="/api/data">
         <h2>Add new Shipwreck</h2>
         <label>
             recrd:
@@ -10,19 +10,19 @@
             <input type="text" name="vesslterms">
         </label><br>
         <label>
-            feature_type:
+            * feature_type:
             <input type="text" name="feature_type" required>
         </label><br>
         <label>
-            chart:
+            * chart:
             <input type="text" name="chart" required>
         </label><br>
         <label>
-            latdec:
+            * latdec:
             <input type="number" name="latdec" required>
         </label><br>
         <label>
-            londec:
+            * londec:
             <input type="number" name="londec" required>
         </label><br>
         <label>
@@ -30,7 +30,7 @@
             <input type="text" name="gp_quality">
         </label><br>
         <label>
-            depth:
+            * depth:
             <input type="number" name="depth" required>
         </label><br>
         <label>
@@ -46,7 +46,7 @@
             <input type="text" name="quasou">
         </label><br>
         <label>
-            watlev:
+            * watlev:
             <input type="text" name="watlev" required>
         </label><br>
         <input type="submit" value="Submit">
