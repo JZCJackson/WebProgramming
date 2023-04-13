@@ -91,10 +91,13 @@ router.post('/login', (req, res) => {
                                     {expiresIn: 3600},
                                     (err, token) => {
                                         console.log(err)
-                                        res.json({
-                                            success: true,
-                                            token: 'Bearer ' + token
-                                        })
+                                        // res.json({
+                                        //     success: true,
+                                        //     token: 'Bearer ' + token
+                                        // })
+                                        const jsonObj = {success: true, token: 'Bearer ' + token}
+                                        console.log(jsonObj)
+                                        res.status(200).render('index', { message: JSON.stringify(jsonObj) })
                                     }
                                 )
                             }
@@ -108,7 +111,6 @@ router.post('/login', (req, res) => {
                 res.status(400).send('Username is not there.')
             }
         })
-
 })
 
 // function validateCookie(req, res, next) {

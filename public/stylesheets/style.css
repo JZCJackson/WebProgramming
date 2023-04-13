@@ -61,6 +61,12 @@ th, td {
     margin: 10px;
 }
 
+#limit-width {
+    width: 90%;
+    display: inline;
+    margin: auto;
+}
+
 .highlight {
     background-color: yellow;
 }
