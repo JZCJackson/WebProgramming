@@ -60,12 +60,14 @@ router.post('/register', (req, res) => {
 // Route to login a user
 // [POST] http://localhost:8000/api/auth/login
 router.post('/login', (req, res) => {
-    username = req.body.username
-    password = req.body.password // 123456
+    const username = req.body.username
+    const password = req.body.password // 123456
 
+    console.log("bodyparserun" + req.body.username)
+    console.log("bodyparserps" + req.body.password)
     // check if username is already in collection.
     Person
-        .findOne({username: req.body.username})
+        .findOne({username: username})
         .then(person => {
             if (person) {
                 // compare the password
@@ -91,24 +93,32 @@ router.post('/login', (req, res) => {
                                     {expiresIn: 3600},
                                     (err, token) => {
                                         console.log(err)
-                                        // res.json({
-                                        //     success: true,
-                                        //     token: 'Bearer ' + token
-                                        // })
-                                        const jsonObj = {success: true, token: 'Bearer ' + token}
-                                        console.log(jsonObj)
-                                        res.status(200).render('index', { message: JSON.stringify(jsonObj) })
+                                        res.status(200).json({
+                                            success: true,
+                                            token: 'Bearer ' + token
+                                        })
+                                        // const jsonObj = {success: true, token: 'Bearer ' + token}
+                                        // console.log(jsonObj)
+                                        // res.status(200).render('index', { message: JSON.stringify(jsonObj) })
                                     }
                                 )
                             }
                             else {
-                                res.status(401).send('Password is not correct')
+                                // res.status(401).send('Password is not correct')
+                                res.status(401).json({
+                                    success: false,
+                                    token: "no such password"
+                                })
                             }
                         }
                     )
                     .catch()
             } else {
-                res.status(400).send('Username is not there.')
+                // res.status(400).send('Username is not there.')
+                res.status(401).json({
+                    success: false,
+                    token: "no such user"
+                })
             }
         })
 })

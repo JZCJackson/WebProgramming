@@ -12,7 +12,9 @@ const app = express()
 
 
 // middleware for bodyparser
-app.use(express.urlencoded({ extended: true }));
+// app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: false }))
 
 // adding middleware to serve static files under public foloder, such as style.css
 app.use(express.static(path.join(__dirname, 'public')));

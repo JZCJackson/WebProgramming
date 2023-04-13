@@ -1,8 +1,38 @@
 <div class="center-content">
-    <form method="POST" action="/api/auth/login">
+    <form method="POST" action="/api/auth/login" onsubmit="submitForm(event)">
         <h2>Login</h2><br>
         <input type="text" name="username" placeholder="Enter Username"><br><br>
         <input type="password" name="password" placeholder="Enter Password"><br><br>
         <input type="submit" value="Submit">
     </form>
 </div>
+
+<script>
+        async function submitForm(event) {
+            event.preventDefault();
+            console.log(event)
+            const formData = new FormData(event.target);
+            const username = formData.get('username');
+            const password = formData.get('password');
+            console.log(username)
+            console.log(password)
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ 
+                    username: username, 
+                    password: password})
+            });
+
+            if (response.ok) {
+                const jsonResponse = await response.json();
+                localStorage.setItem('token', jsonResponse.token);
+                alert('Token has been saved in local storage.');
+            } else {
+                const jsonResponse = await response.json();
+                alert(jsonResponse.token);
+            }
+        }
+    </script>

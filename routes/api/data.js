@@ -137,4 +137,14 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
         })
 })
 
+
+// george test
+router.get('/george/add', (req, res) => {
+    res.render("addDataTest", {})
+})
+
+router.get('/george/search', (req, res) => {
+    res.render("searchDataTest", {})
+})
+
 module.exports = router
