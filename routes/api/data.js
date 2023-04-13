@@ -147,4 +147,10 @@ router.get('/george/search', (req, res) => {
     res.render("searchDataTest", {})
 })
 
+router.get('/george/get', (req, res) => {
+    res.render("getDataTest", {})
+})
+
+
+
 module.exports = router

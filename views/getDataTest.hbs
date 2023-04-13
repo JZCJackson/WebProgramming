@@ -1,0 +1,62 @@
+<div class="center-content">
+    <form action="/search" method="get" enctype="application/x-www-form-urlencoded" onsubmit="submitForm(event)">
+        <input type="number" name="page" placeholder="Enter Page Number">
+        <input type="number" name="perPage" placeholder="Enter Number of Records per Page">
+        <input type="number" name="depth" placeholder="Enter Depth (optional)">
+        <button type="submit">Get Shipwrecks</button>
+    </form>
+    <div id="results" class="results">
+        <!-- The fetched data will be displayed here -->
+    </div>
+</div>
+
+<script>
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const page = formData.get('page');
+        const perPage = formData.get('perPage');
+        const depth = formData.get('depth');
+
+        const token = localStorage.getItem('token');
+
+        const queryParams = new URLSearchParams();
+        if (page) queryParams.append('page', page);
+        if (perPage) queryParams.append('perPage', perPage);
+        if (depth) queryParams.append('depth', depth);
+
+        const response = await fetch('/api/data?' + queryParams.toString(), {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        });
+
+        const resultsElement = document.getElementById('results');
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+
+            let htmlContent = '';
+
+            data.forEach(shipwreck => {
+                htmlContent += `<div class="shipwreck">
+                    <h3>${shipwreck.feature_type}</h3>
+                    <p>Record: ${shipwreck.recrd}</p>
+                    <p>Vessel Terms: ${shipwreck.vesslterms}</p>
+                    <p>Depth: ${shipwreck.depth}</p>
+                    <!-- Add more fields here as needed -->
+                </div>`;
+            });
+
+            resultsElement.innerHTML = htmlContent;
+
+        } else {
+            console.log('Error:', response.status);
+            resultsElement.innerHTML = '<p>Error fetching shipwrecks data.</p>';
+        }
+    }
+</script>
