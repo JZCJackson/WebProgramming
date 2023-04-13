@@ -1,4 +1,4 @@
-<div class="center-content">
+<div class="center-content" style="display: flex; flex-direction: column; align-items: center;">
     <form action="/search" method="get" enctype="application/x-www-form-urlencoded" onsubmit="submitForm(event)">
         <input type="number" name="page" placeholder="Enter Page Number">
         <input type="number" name="perPage" placeholder="Enter Number of Records per Page">
@@ -47,7 +47,12 @@
                     <h3>${shipwreck.feature_type}</h3>
                     <p>Record: ${shipwreck.recrd}</p>
                     <p>Vessel Terms: ${shipwreck.vesslterms}</p>
+                    <p>Chart: ${shipwreck.chart}</p>
+                    <p>Latitude: ${shipwreck.latdec}</p>
+                     <p>longtitude: ${shipwreck.londec}</p>
                     <p>Depth: ${shipwreck.depth}</p>
+                    <p>History: ${shipwreck.history}</p>
+                    <p>Water Level: ${shipwreck.watlev}</p>
                     <!-- Add more fields here as needed -->
                 </div>`;
             });

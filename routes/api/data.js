@@ -139,15 +139,15 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
 
 
 // george test
-router.get('/george/add', (req, res) => {
+router.get('/group6/add', (req, res) => {
     res.render("addDataTest", {})
 })
 
-router.get('/george/search', (req, res) => {
+router.get('/group6/search', (req, res) => {
     res.render("searchDataTest", {})
 })
 
-router.get('/george/get', (req, res) => {
+router.get('/group6/get', (req, res) => {
     res.render("getDataTest", {})
 })
 
