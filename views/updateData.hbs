@@ -1,9 +1,9 @@
 <div class="center-content">
-    <form method="put" action="/update" onsubmit="submitForm(event)">
+    <form method="PUT" action="/update" onsubmit="submitForm(event)">
         <h2>Update Shipwreck</h2>
         <label>
             * ID:
-            <input type="text" name="id">
+            <input type="text" name="id" required>
         </label><br>
         <label>
             recrd:
@@ -67,8 +67,9 @@
         const shipwreckData = {};
 
         for (const [key, value] of formData.entries()) {
-            if (key != 'id'):
+            if (key !== 'id') {
                 shipwreckData[key] = value;
+            }
         }
 
         const token = localStorage.getItem('token');

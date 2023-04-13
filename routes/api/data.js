@@ -106,7 +106,7 @@ router.put('/:id', passport.authenticate('jwt', { session: false }), (req, res) 
         })
         .exec()
         .then(() => {
-            res.status(200).send('Record Updated: ' + req.params.id)
+            res.status(200).json({ message: 'Record Updated: ' + req.params.id });
         })
         .catch((err) => {
             res.status(500).send(err)
@@ -120,7 +120,7 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
     Shipwreck.deleteOne({_id: req.params.id})
         .exec()
         .then(() => {
-            res.status(200).send('Record Deleted: ' + req.params.id)
+            res.status(200).json({ message:'Record Deleted: ' + req.params.id});
         })
         .catch((err) => { 
             res.status(500).send(err)
