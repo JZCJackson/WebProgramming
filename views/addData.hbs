@@ -1,5 +1,5 @@
 <div class="center-content">
-    <form method="POST" action="/api/data/add">
+    <form method="POST" action="/add" onsubmit="submitForm(event)">
         <h2>Add new Shipwreck</h2>
         <label>
             recrd:
@@ -52,3 +52,36 @@
         <input type="submit" value="Submit">
     </form>
 </div>
+
+<script>
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const shipwreckData = {};
+
+        for (const [key, value] of formData.entries()) {
+            shipwreckData[key] = value;
+        }
+
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('/api/data/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            },
+            body: JSON.stringify(shipwreckData)
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            alert('Shipwreck has been added successfully.');
+        } else {
+            console.log('Error:', response.status);
+            alert('Error in adding shipwreck.');
+        }
+    }
+</script>

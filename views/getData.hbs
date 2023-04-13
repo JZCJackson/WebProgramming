@@ -44,12 +44,13 @@
 
             data.forEach(shipwreck => {
                 htmlContent += `<div class="shipwreck">
-                    <h3>${shipwreck.feature_type}</h3>
+                    <h4>${shipwreck.feature_type}</h4>
                     <p>Record: ${shipwreck.recrd}</p>
                     <p>Vessel Terms: ${shipwreck.vesslterms}</p>
+                    <p>Feature Type: ${shipwreck.feature_type}</p>
                     <p>Chart: ${shipwreck.chart}</p>
                     <p>Latitude: ${shipwreck.latdec}</p>
-                     <p>longtitude: ${shipwreck.londec}</p>
+                    <p>longtitude: ${shipwreck.londec}</p>
                     <p>Depth: ${shipwreck.depth}</p>
                     <p>History: ${shipwreck.history}</p>
                     <p>Water Level: ${shipwreck.watlev}</p>

@@ -1,6 +1,48 @@
 <div class="center-content">
-    <form action="/search" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="/search" method="post" enctype="application/x-www-form-urlencoded" onsubmit="submitForm(event)">
         <input type="text" name="id" placeholder="Enter Shipwreck ID">
         <button type="submit">Search</button>
     </form>
 </div>
+<div id="searchResult" class="results"></div>
+
+<script>
+    async function submitForm(event) {
+        event.preventDefault();
+
+        const formData = new FormData(event.target);
+        const id = formData.get('id');
+
+        const token = localStorage.getItem('token');
+
+        const response = await fetch('/api/data/' + id, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': token
+            }
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data);
+            
+            document.getElementById('searchResult').innerHTML = `<div class="shipwreck">
+                <h4>${data.feature_type}</h4>
+                <p>Record: ${data.recrd}</p>
+                <p>Vessel Terms: ${data.vesslterms}</p>
+                <p>Feature Type: ${data.feature_type}</p>
+                <p>Chart: ${data.chart}</p>
+                <p>Latitude: ${data.latdec}</p>
+                <p>longtitude: ${data.londec}</p>
+                <p>Depth: ${data.depth}</p>
+                <p>History: ${data.history}</p>
+                <p>Water Level: ${data.watlev}</p>
+                <!-- Add more fields here as needed -->
+            </div>`;
+        } else {
+            console.log('Error:', response.status);
+            document.getElementById('searchResult').innerHTML = `Error in searching shipwreck`;
+        }
+    }
+</script>

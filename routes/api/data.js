@@ -36,12 +36,6 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 
 })
 
-// render addData page to show add Shipwreck form
-// [GET] http://localhost:8000/api/data/add
-router.get('/add', (req, res) => {
-    res.render("addData", {})
-})
-
 // get Shipwreck records by certain page, perPage, and depth
 // [GET] http://localhost:8000/api/data/
 router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => {
@@ -59,10 +53,6 @@ router.get('/', passport.authenticate('jwt', { session: false }), (req, res) => 
     query.skip((page - 1) * perPage).limit(perPage)
         .then(shipwrecks => res.status(200).send(shipwrecks))
         .catch(err => res.status(500).send(err))
-})
-
-router.get('/search', (req, res) => {
-    res.render("searchData", {})
 })
 
 // Get Shipwreck record by id
@@ -137,20 +127,25 @@ router.delete('/:id', passport.authenticate('jwt', { session: false }), (req, re
         })
 })
 
-
-// george test
-router.get('/group6/add', (req, res) => {
-    res.render("addDataTest", {})
+// render pages
+router.get('/team6/get', (req, res) => {
+    res.render("getData", {})
 })
 
-router.get('/group6/search', (req, res) => {
-    res.render("searchDataTest", {})
+router.get('/team6/add', (req, res) => {
+    res.render("addData", {})
 })
 
-router.get('/group6/get', (req, res) => {
-    res.render("getDataTest", {})
+router.get('/team6/search', (req, res) => {
+    res.render("searchData", {})
 })
 
+router.get('/team6/update', (req, res) => {
+    res.render("updateData", {})
+})
 
+router.get('/team6/delete', (req, res) => {
+    res.render("deleteData", {})
+})
 
 module.exports = router
